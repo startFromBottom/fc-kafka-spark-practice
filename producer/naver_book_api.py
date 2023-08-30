@@ -63,6 +63,7 @@ if __name__ == '__main__':
             print(book)
             print("=====")
             producer.produce(topic="book", value=book.SerializeToString())
+            producer.flush()
         print(f"keyword({keyword}) 전송 완료!")
         time.sleep(3)
-        producer.flush()
+

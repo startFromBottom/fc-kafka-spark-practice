@@ -50,7 +50,6 @@ if __name__ == '__main__':
         for item in original_data['documents']:
             book = pb2.Book()
             book.title = item['title']
-            book.title = item['title']
             book.author = ','.join(item['authors'])
             book.publisher = item['publisher']
             book.isbn = item['isbn']
@@ -61,5 +60,6 @@ if __name__ == '__main__':
             print(book)
             print("=====")
             producer.produce(topic="book", value=book.SerializeToString())
+            producer.flush()
         print(f"keyword({keyword}) 전송 완료!")
-        time.sleep(10)
+        time.sleep(3)

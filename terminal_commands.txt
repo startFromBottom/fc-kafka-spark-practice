@@ -1,3 +1,6 @@
+# python 가상 환경에, requirements.txt 에 명시된 라이브러리들 한 번에 설치하기
+pip install -r requirements.txt
+
 # kafka container 띄우기
 docker-compose up -d
 # kafka container 내리기
