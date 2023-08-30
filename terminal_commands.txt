@@ -1,0 +1,24 @@
+# kafka container 띄우기
+docker-compose up -d
+# kafka container 내리기
+docker-compose down
+
+# book 토픽 생성
+docker-compose exec kafka kafka-topics --create --topic book --bootstrap-server kafka:9092
+# book 토픽 삭제
+docker-compose exec kafka kafka-topics --delete --topic book --bootstrap-server kafka:9092
+
+# proto buffer 컴파일
+protoc -I=./ --python_out=./ ./proto/book_data.proto
+
+# proto buffer descriptor 파일 생성 (pyspark from_protobuf() 에 사용)
+protoc -o proto/book_data.desc proto/book_data.proto
+
+# spark-submit 명령어
+# 명령어 입력 전에, https://mvnrepository.com/ 에서 해당 라이브러리들의 jar 파일을 다운로드한 후,
+# 가상 python 환경의 pyspark/jars 폴더에 직접 넣어줘야 정상 동작합니다.
+# jars 폴더 내에 저장된 jar들을 그대로 복사 붙여넣기 해주셔도 됩니다.
+# 저의 경우는 pycharm project root path 기준,
+# functions/venv/lib/python3.11/site-packages/pyspark/jars/ 아래에 직접 jar 파일들을 넣어주었습니다.
+spark-submit consumer/spark_streaming.py --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.1,org.apache.kafka:kafka-clients:3.4.0,org.apache.spark:spark-
+streaming_2.12-3.4.1,org.apache.spark:spark-token-provider-kafka-0-10_2.12-3.4.1,org.apache.commons:commons-pool2:2.11.1,org.apache.spark:spark-protobuf_2.12:3.4.1

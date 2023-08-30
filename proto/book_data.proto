@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Book {
+  string title = 1;
+  string author = 2; // 작가
+  string publisher = 3; // 출판사
+  string isbn = 4; // ISBN
+  int32 price = 5; // 가격
+  string publication_date = 6; // 출판일
+  string source = 7; // 소스 데이터 (ex: naver, kakao)
+}

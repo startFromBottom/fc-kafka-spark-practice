@@ -1,0 +1,11 @@
+
+á
+proto/book_data.proto"¿
+Book
+title (	Rtitle
+author (	Rauthor
+	publisher (	R	publisher
+isbn (	Risbn
+price (Rprice)
+publication_date (	RpublicationDate
+source (	Rsourcebproto3
